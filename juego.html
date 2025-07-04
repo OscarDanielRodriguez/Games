@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Palabras Desordenadas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Adivina la Palabra</h1>
+
+        <div class="controls">
+            <button id="reset-button" class="btn">Reiniciar Juego</button>
+            <div class="difficulty-selector">
+                <label for="difficulty">Dificultad:</label>
+                <select id="difficulty">
+                    <option value="easy">Básico</option>
+                    <option value="medium">Medio</option>
+                    <option value="hard">Difícil</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="score-board">
+            <div class="lives">
+                Vidas: <span id="lives-display">❤️❤️❤️❤️❤️</span>
+            </div>
+            <div class="time">
+                Tiempo: <span id="time-display">30s</span>
+            </div>
+        </div>
+
+        <div class="word-display">
+            <h2 id="scrambled-word"></h2>
+            <p class="hint">Ordena las letras para formar la palabra.</p>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Escribe tu respuesta aquí..." maxlength="30">
+            <button id="submit-button" class="btn">Enviar</button>
+        </div>
+
+        <p id="game-message" class="game-message"></p>
+
+        <div id="game-over-screen" class="game-over-screen hidden">
+            <p id="final-message" class="final-message"></p>
+            <button id="play-again-button" class="btn restart-game-button">Volver a Jugar</button>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

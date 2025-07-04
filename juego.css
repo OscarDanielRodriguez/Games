@@ -1,0 +1,359 @@
+/* css/style.css */
+
+/* Estilos Generales y Reset */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif; /* Usamos la fuente Poppins */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f0f2f5; /* Fondo claro y agradable */
+    color: #333;
+    display: flex; /* Para centrar el contenido verticalmente */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ocupa al menos toda la altura de la ventana */
+    padding: 20px;
+    box-sizing: border-box; /* Incluye padding y border en el tamaño del elemento */
+}
+
+.game-container {
+    max-width: 800px;
+    width: 100%; /* Ocupa el 100% del ancho disponible hasta el max-width */
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px; /* Espaciado entre elementos */
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.8em;
+    color: #6a0572; /* Morado vibrante */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Botones y Selectores Generales */
+.btn {
+    background-color: #8e24aa; /* Morado */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-family: 'Poppins', sans-serif;
+    outline: none; /* Eliminar el contorno al hacer clic */
+}
+
+.btn:hover:not(:disabled) {
+    background-color: #6a0572; /* Morado más oscuro */
+    transform: translateY(-2px);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Controles (Dificultad y Reiniciar) */
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    gap: 20px;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+}
+
+#reset-button {
+    background-color: #00bcd4; /* Cian vibrante */
+}
+
+#reset-button:hover:not(:disabled) {
+    background-color: #00acc1;
+}
+
+.difficulty-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.difficulty-selector label {
+    font-weight: bold;
+}
+
+.difficulty-selector select {
+    padding: 10px 15px;
+    border: 2px solid #00bcd4;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 1em;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+    appearance: none; /* Elimina estilos por defecto del navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Flecha personalizada usando SVG en background-image */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%2300BCD4" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.difficulty-selector select:hover:not(:disabled) {
+    border-color: #00acc1;
+    box-shadow: 0 0 5px rgba(0, 188, 212, 0.4);
+}
+.difficulty-selector select:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Marcador (Vidas y Tiempo) */
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 500px;
+    background-color: #e0f2f7; /* Azul claro */
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    font-weight: bold;
+}
+
+.score-board .lives,
+.score-board .time {
+    display: flex;
+    align-items: center;
+    font-size: 1.4em;
+    color: #3f51b5;
+}
+
+.score-board .lives #lives-display {
+    margin-left: 8px;
+    font-size: 1.5em; /* Tamaño para los corazones/iconos */
+    color: #ff4081; /* Rosa vibrante para vidas */
+    animation: pulseHeart 0.8s infinite alternate; /* Animación sutil del corazón */
+}
+@keyframes pulseHeart {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
+
+.score-board .time #time-display {
+    margin-left: 8px;
+    font-size: 1.5em;
+    color: #d84315; /* Naranja rojizo para tiempo */
+}
+
+/* Visualización de la Palabra */
+.word-display {
+    background-color: #f7f7f7;
+    padding: 25px 40px;
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    min-width: 70%;
+    margin-bottom: 20px;
+}
+
+.word-display h2 {
+    font-size: 3.5em;
+    letter-spacing: 5px; /* Espaciado entre letras */
+    color: #3f51b5; /* Azul vibrante */
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 10px;
+    animation: pulseText 1.5s infinite ease-in-out; /* Animación de pulsación */
+}
+@keyframes pulseText {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.word-display .hint {
+    font-size: 1.1em;
+    color: #777;
+    font-style: italic;
+    margin-top: 15px;
+}
+
+/* Área de Entrada del Usuario */
+.input-area {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    width: 100%;
+    justify-content: center;
+}
+
+.input-area input {
+    flex-grow: 1;
+    padding: 15px 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 1.2em;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    max-width: 400px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.input-area input:focus {
+    border-color: #8e24aa; /* Morado más claro al enfocar */
+    box-shadow: 0 0 8px rgba(142, 36, 170, 0.3);
+}
+
+.input-area input::placeholder {
+    color: #aaa;
+}
+
+/* Mensajes del Juego */
+.game-message {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    min-height: 2em; /* Espacio mínimo para el mensaje */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-message.correct {
+    background-color: #d4edda;
+    color: #28a745;
+}
+
+.game-message.incorrect {
+    background-color: #f8d7da;
+    color: #dc3545;
+}
+
+/* Pantalla de Fin de Juego */
+.game-over-screen {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fce4ec; /* Rosa suave */
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.game-over-screen .final-message {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #6a0572;
+    margin-bottom: 20px;
+}
+
+.game-over-screen .restart-game-button {
+    background-color: #ff6f61; /* Coral */
+}
+
+.game-over-screen .restart-game-button:hover:not(:disabled) {
+    background-color: #e65c50;
+}
+
+/* Utilidades */
+.hidden {
+    display: none !important; /* Oculta elementos */
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 2.2em;
+    }
+    .word-display h2 {
+        font-size: 2.8em;
+        letter-spacing: 3px;
+    }
+    .score-board {
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px;
+    }
+    .score-board .lives,
+    .score-board .time {
+        font-size: 1.2em;
+    }
+    .score-board .lives #lives-display,
+    .score-board .time #time-display {
+        font-size: 1.3em;
+    }
+    .input-area {
+        flex-direction: column;
+        align-items: center;
+    }
+    .input-area input {
+        width: 90%;
+        max-width: none;
+    }
+    .input-area .btn {
+        width: 90%;
+        padding: 12px 20px;
+        font-size: 1.1em;
+    }
+    .controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .controls .btn,
+    .controls select {
+        width: 90%;
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    .word-display h2 {
+        font-size: 2em;
+        letter-spacing: 2px;
+    }
+    .word-display .hint {
+        font-size: 0.9em;
+    }
+    .game-message {
+        font-size: 1em;
+        padding: 8px 12px;
+    }
+    .game-over-screen .final-message {
+        font-size: 1.2em;
+    }
+}
